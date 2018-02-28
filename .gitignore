@@ -1,0 +1,9 @@
+.class
+
+#Package files
+*.war
+*.ear
+
+/Shared/target/
+/.idea
+*.iml
