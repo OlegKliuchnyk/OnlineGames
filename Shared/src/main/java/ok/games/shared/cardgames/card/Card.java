@@ -1,10 +1,10 @@
-package ok.games.shared.cardgames;
+package ok.games.shared.cardgames.card;
 
 public class Card {
     private final Suit suit;
     private final Rank rank;
     private final byte index;
-    private final short power;
+    private byte power;
 
     public Card(Suit suit, Rank rank) {
         this.suit = suit;
@@ -13,7 +13,7 @@ public class Card {
         byte suitValue = (byte) suit.ordinal();
         byte rankValue = (byte) rank.ordinal();
         index = (byte) (rankValue * 4 + suitValue);
-        power = rankValue;
+        setPower(rankValue);
     }
 
     public Suit getSuit() {
@@ -30,6 +30,10 @@ public class Card {
 
     public short getPower() {
         return power;
+    }
+
+    protected void setPower(byte power) {
+        this.power = power;
     }
 
     @Override

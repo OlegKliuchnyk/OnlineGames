@@ -1,4 +1,4 @@
-package ok.games.shared.cardgames;
+package ok.games.shared.cardgames.card;
 
 public enum Suit {
       HEARTS
