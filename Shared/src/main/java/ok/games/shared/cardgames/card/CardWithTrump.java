@@ -1,19 +1,24 @@
 package ok.games.shared.cardgames.card;
 
 public class CardWithTrump extends Card {
-    private final boolean isTrump;
+    private boolean isTrump;
 
-    public CardWithTrump(Suit suit, Rank rank, boolean isTrump) {
+    public CardWithTrump(Suit suit, Rank rank) {
         super(suit, rank);
-        this.isTrump = isTrump;
-        if (isTrump) {
-            byte power = (byte) (getPower() + Rank.values().length);
-            setPower(power);
-        }
+        this.isTrump = false;
     }
 
     public boolean isTrump() {
         return isTrump;
+    }
+
+    public void setTrump(boolean trump) {
+        isTrump = trump;
+        if (isTrump) {
+            byte power = (byte) (getPower() + Rank.values().length);
+            setPower(power);
+        } else
+            setDefaultPower();
     }
 
     @Override

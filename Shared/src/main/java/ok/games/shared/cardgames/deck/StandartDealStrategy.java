@@ -4,7 +4,7 @@ import ok.games.shared.cardgames.card.Card;
 
 import java.util.List;
 
-class StandartDealStrategy<T extends Card> implements DealCard<T> {
+class StandartDealStrategy<T extends Card> implements DealCardStrategy<T> {
 
     @Override
     public List<T> deal(List<T> cards, int countCards) {

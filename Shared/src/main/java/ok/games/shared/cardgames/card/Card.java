@@ -13,7 +13,7 @@ public class Card {
         byte suitValue = (byte) suit.ordinal();
         byte rankValue = (byte) rank.ordinal();
         index = (byte) (rankValue * 4 + suitValue);
-        setPower(rankValue);
+        setDefaultPower();
     }
 
     public Suit getSuit() {
@@ -32,8 +32,13 @@ public class Card {
         return power;
     }
 
-    protected void setPower(byte power) {
+    void setPower(byte power) {
         this.power = power;
+    }
+
+    void setDefaultPower() {
+        byte rankValue = (byte) rank.ordinal();
+        setPower(rankValue);
     }
 
     @Override
