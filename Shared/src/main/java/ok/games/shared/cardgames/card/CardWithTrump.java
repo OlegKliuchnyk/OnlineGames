@@ -22,6 +22,11 @@ public class CardWithTrump extends Card {
     }
 
     @Override
+    public CardWithTrump clone() {
+        return (CardWithTrump) super.clone();
+    }
+
+    @Override
     public String toString() {
         return "CardWithTrump{" + getClass().getName() + "@" + Integer.toHexString(hashCode()) +
                 ", suit=" + getSuit() +

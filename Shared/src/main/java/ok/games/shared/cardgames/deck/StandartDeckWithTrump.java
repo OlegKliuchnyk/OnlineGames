@@ -1,9 +1,9 @@
 package ok.games.shared.cardgames.deck;
 
-import ok.games.shared.cardgames.card.Card;
 import ok.games.shared.cardgames.card.CardWithTrump;
 import ok.games.shared.cardgames.card.Rank;
 import ok.games.shared.cardgames.card.Suit;
+import ok.games.shared.exception.IncorrectOperationException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,18 +25,19 @@ public class StandartDeckWithTrump extends Deck<CardWithTrump> implements DeckWi
 
     @Override
     public CardWithTrump getTrump() {
-        return trump;
+        return trump.clone();
     }
 
     @Override
-    public CardWithTrump generateTrump() {
-        //todo we need check if trump not null we must generate exception.
+    public CardWithTrump generateTrump() throws IncorrectOperationException {
+        if(trump != null)
+            throw new IncorrectOperationException("Trump already generated.");
         List<CardWithTrump> cards = getCards();
         Random rnd = new Random(System.currentTimeMillis());
         int index = rnd.nextInt(cards.size());
         trump = cards.get(index);
         setCardTrump(trump);
-        return trump;
+        return getTrump();
     }
 
     @Override

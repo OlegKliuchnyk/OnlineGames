@@ -1,6 +1,7 @@
 package ok.games.shared.cardgames.deck;
 
 import ok.games.shared.cardgames.card.Card;
+import ok.games.shared.exception.IncorrectOperationException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +18,8 @@ public abstract class Deck<T extends Card> {
     private List<T> dealedCards;
 
     public Deck(DealCardStrategy<T> dealStrategy) {
+        if(dealStrategy == null)
+            throw new NullPointerException("Deal strategy was null.");
         this.dealStrategy = dealStrategy;
         cards = new ArrayList<>();
         dealedCards = new ArrayList<>();
@@ -33,19 +36,23 @@ public abstract class Deck<T extends Card> {
     }
 
     List<T> getCards() {
-        return cards;
+        return new ArrayList<>(cards);
     }
 
     void setCards(List<T> cards) {
-        this.cards = cards;
+        if(cards == null)
+            throw new NullPointerException("Cards was null.");
+        this.cards = new ArrayList<>(cards);
     }
 
     List<T> getDealedCards() {
-        return dealedCards;
+        return new ArrayList<>(dealedCards);
     }
 
     void setDealedCards(List<T> dealedCards) {
-        this.dealedCards = dealedCards;
+        if(dealedCards == null)
+            throw new NullPointerException("Dealed cards was null.");
+        this.dealedCards = new ArrayList<>(dealedCards);
     }
 
     public void shuffle() {
@@ -54,7 +61,7 @@ public abstract class Deck<T extends Card> {
         IntStream.range(1, max).forEach(s -> Collections.shuffle(cards, rnd));
     }
 
-    public List<T> deal(int count) {
+    public synchronized List<T> deal(int count) throws IncorrectOperationException {
         List<T> result = dealStrategy.deal(new ArrayList<>(cards), count);
         cards.removeAll(result);
         dealedCards.addAll(result);

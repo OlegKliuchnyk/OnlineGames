@@ -1,17 +1,18 @@
 package ok.games.shared.cardgames.deck;
 
 import ok.games.shared.cardgames.card.Card;
+import ok.games.shared.exception.IncorrectOperationException;
 
 import java.util.List;
 
-class StandartDealStrategy<T extends Card> implements DealCardStrategy<T> {
+public class StandartDealStrategy<T extends Card> implements DealCardStrategy<T> {
 
     @Override
-    public List<T> deal(List<T> cards, int countCards) {
+    public List<T> deal(List<T> cards, int countCards) throws IncorrectOperationException {
         if(countCards < 1)
-            throw new IllegalArgumentException(String.format("Parameter 'count' = %d less than 1. ", countCards));
+            throw new IncorrectOperationException(String.format("Parameter 'count' = %d less than 1. ", countCards));
         if(countCards > cards.size())
-            throw new IllegalArgumentException(
+            throw new IncorrectOperationException(
                     String.format("Parameter 'count' = %d greater than %d (cards available in deck).",
                             countCards, cards.size())
             );
