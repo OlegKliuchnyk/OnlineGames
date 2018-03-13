@@ -9,7 +9,6 @@ public class CardWithTrumpTest {
     @Test
     public void cloneMethod() {
         CardWithTrump card = new CardWithTrump(Suit.HEARTS, Rank.JACK);
-        card.setTrump(true);
         CardWithTrump cloned = card.clone();
         assertNotSame(card, cloned);
     }
