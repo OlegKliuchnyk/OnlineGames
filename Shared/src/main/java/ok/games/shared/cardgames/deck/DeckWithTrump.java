@@ -5,5 +5,4 @@ import ok.games.shared.exception.IncorrectOperationException;
 
 public interface DeckWithTrump<T extends Card> {
     T getTrump();
-    T generateTrump() throws IncorrectOperationException;
 }

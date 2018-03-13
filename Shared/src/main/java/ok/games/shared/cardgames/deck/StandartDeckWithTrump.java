@@ -4,6 +4,7 @@ import ok.games.shared.cardgames.card.CardWithTrump;
 import ok.games.shared.cardgames.card.Rank;
 import ok.games.shared.cardgames.card.Suit;
 import ok.games.shared.exception.IncorrectOperationException;
+import org.apache.log4j.Logger;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class StandartDeckWithTrump extends Deck<CardWithTrump> implements DeckWithTrump<CardWithTrump> {
+    private final static Logger logger = Logger.getLogger(StandartDeckWithTrump.class);
     private static final byte DECK_SIZE = 52;
 
     private CardWithTrump trump;
@@ -28,8 +30,7 @@ public class StandartDeckWithTrump extends Deck<CardWithTrump> implements DeckWi
         return trump.clone();
     }
 
-    @Override
-    public CardWithTrump generateTrump() throws IncorrectOperationException {
+    CardWithTrump generateTrump() throws IncorrectOperationException {
         if(trump != null)
             throw new IncorrectOperationException("Trump already generated.");
         List<CardWithTrump> cards = getCards();
@@ -56,6 +57,12 @@ public class StandartDeckWithTrump extends Deck<CardWithTrump> implements DeckWi
                             .map(suit -> new CardWithTrump(suit, rank)))
                     .collect(Collectors.toList());
             setCards(cards);
+        }
+        shuffle();
+        try {
+            generateTrump();
+        } catch (IncorrectOperationException e) {
+            logger.error("Can't generate trump.", e);
         }
     }
 }

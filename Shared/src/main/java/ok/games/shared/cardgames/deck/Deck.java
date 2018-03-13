@@ -10,8 +10,9 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 public abstract class Deck<T extends Card> {
-    private static final byte MIN_SHUFFLE_TIMES = 25;
-    private static final byte MAX_SHUFFLE_TIMES = 100;
+    private static final byte MIN_SHUFFLE_TIMES = 50;
+    private static final byte MAX_SHUFFLE_TIMES = Byte.MAX_VALUE;
+    private static final byte DEFAULT_DECK_SIZE = 52;
 
     private DealCardStrategy<T> dealStrategy;
     private List<T> cards;
@@ -21,12 +22,16 @@ public abstract class Deck<T extends Card> {
         if(dealStrategy == null)
             throw new NullPointerException("Deal strategy was null.");
         this.dealStrategy = dealStrategy;
-        cards = new ArrayList<>();
-        dealedCards = new ArrayList<>();
+        setDeckCapacity(DEFAULT_DECK_SIZE);
         init();
     }
 
     public abstract void init();
+
+    void setDeckCapacity(int capacity) {
+        cards = new ArrayList<>(capacity);
+        dealedCards = new ArrayList<>(capacity);
+    }
 
     void clear() {
         if (!dealedCards.isEmpty()) {
@@ -42,7 +47,8 @@ public abstract class Deck<T extends Card> {
     void setCards(List<T> cards) {
         if(cards == null)
             throw new NullPointerException("Cards was null.");
-        this.cards = new ArrayList<>(cards);
+        this.cards.clear();
+        this.cards.addAll(cards);
     }
 
     List<T> getDealedCards() {
@@ -52,10 +58,11 @@ public abstract class Deck<T extends Card> {
     void setDealedCards(List<T> dealedCards) {
         if(dealedCards == null)
             throw new NullPointerException("Dealed cards was null.");
-        this.dealedCards = new ArrayList<>(dealedCards);
+        this.dealedCards.clear();
+        this.dealedCards.addAll(dealedCards);
     }
 
-    public void shuffle() {
+    void shuffle() {
         Random rnd = new Random(System.currentTimeMillis());
         int max = rnd.nextInt(MAX_SHUFFLE_TIMES - MIN_SHUFFLE_TIMES) + MIN_SHUFFLE_TIMES;
         IntStream.range(1, max).forEach(s -> Collections.shuffle(cards, rnd));

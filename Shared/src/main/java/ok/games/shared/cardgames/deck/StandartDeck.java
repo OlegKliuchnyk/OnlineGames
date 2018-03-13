@@ -14,9 +14,6 @@ public class StandartDeck extends Deck<Card> {
 
     public StandartDeck(DealCardStrategy<Card> dealStrategy) {
         super(dealStrategy);
-        setCards(new ArrayList<>(DECK_SIZE));
-        setDealedCards(new ArrayList<>(DECK_SIZE));
-        init();
     }
 
     @Override
@@ -30,5 +27,6 @@ public class StandartDeck extends Deck<Card> {
                     .collect(Collectors.toList());
             setCards(cards);
         }
+        shuffle();
     }
 }
