@@ -12,7 +12,7 @@ public class CardWithTrump extends Card {
         return isTrump;
     }
 
-    public void setTrump(boolean trump) {
+    private void setTrump(boolean trump) {
         isTrump = trump;
         if (isTrump) {
             byte power = (byte) (getPower() + Rank.values().length);

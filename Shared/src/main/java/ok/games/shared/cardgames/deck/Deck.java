@@ -28,41 +28,41 @@ public abstract class Deck<T extends Card> {
 
     public abstract void init();
 
-    void setDeckCapacity(int capacity) {
+    protected void setDeckCapacity(int capacity) {
         cards = new ArrayList<>(capacity);
         dealedCards = new ArrayList<>(capacity);
     }
 
-    void clear() {
+    protected void clear() {
         if (!dealedCards.isEmpty()) {
             cards.addAll(dealedCards);
             dealedCards.clear();
         }
     }
 
-    List<T> getCards() {
-        return new ArrayList<>(cards);
+    protected List<T> getCards() {
+        return cards;
     }
 
-    void setCards(List<T> cards) {
+    protected void setCards(List<T> cards) {
         if(cards == null)
             throw new NullPointerException("Cards was null.");
         this.cards.clear();
         this.cards.addAll(cards);
     }
 
-    List<T> getDealedCards() {
-        return new ArrayList<>(dealedCards);
+    protected List<T> getDealedCards() {
+        return dealedCards;
     }
 
-    void setDealedCards(List<T> dealedCards) {
+    protected void setDealedCards(List<T> dealedCards) {
         if(dealedCards == null)
             throw new NullPointerException("Dealed cards was null.");
         this.dealedCards.clear();
         this.dealedCards.addAll(dealedCards);
     }
 
-    void shuffle() {
+    protected void shuffle() {
         Random rnd = new Random(System.currentTimeMillis());
         int max = rnd.nextInt(MAX_SHUFFLE_TIMES - MIN_SHUFFLE_TIMES) + MIN_SHUFFLE_TIMES;
         IntStream.range(1, max).forEach(s -> Collections.shuffle(cards, rnd));
