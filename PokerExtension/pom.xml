@@ -9,6 +9,7 @@
     <groupId>ok.games</groupId>
     <artifactId>onlinegames-poker</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -18,4 +19,32 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <project.java.version>1.8</project.java.version>
+        <project.encoding>UTF-8</project.encoding>
+        <project.logger.version>1.2.17</project.logger.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <encoding>${project.encoding}</encoding>
+                    <target>${project.java.version}</target>
+                    <source>${project.java.version}</source>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <encoding>${project.encoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
