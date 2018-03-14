@@ -55,13 +55,6 @@ public abstract class Deck<T extends Card> {
         return dealedCards;
     }
 
-    protected void setDealedCards(List<T> dealedCards) {
-        if(dealedCards == null)
-            throw new NullPointerException("Dealed cards was null.");
-        this.dealedCards.clear();
-        this.dealedCards.addAll(dealedCards);
-    }
-
     protected void shuffle() {
         Random rnd = new Random(System.currentTimeMillis());
         int max = rnd.nextInt(MAX_SHUFFLE_TIMES - MIN_SHUFFLE_TIMES) + MIN_SHUFFLE_TIMES;
