@@ -16,6 +16,7 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${project.logger.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
