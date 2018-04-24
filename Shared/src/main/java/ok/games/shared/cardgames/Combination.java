@@ -1,4 +1,4 @@
-package ok.games.shared.cardgames.poker;
+package ok.games.shared.cardgames;
 
 import ok.games.shared.cardgames.card.Card;
 
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Combination {
-    private List<Card> cards;
-    private short power;
+    private final List<Card> cards;
+    private final short power;
 
     public Combination(List<Card> cards, short power) {
         if(cards == null)
