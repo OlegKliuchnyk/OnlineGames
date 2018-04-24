@@ -1,4 +1,4 @@
-package ok.games.shared.cardgames.poker;
+package ok.games.shared.cardgames;
 
 import ok.games.shared.cardgames.card.Card;
 
